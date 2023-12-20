@@ -6,9 +6,8 @@ import { uploadOnCloudinary } from "../service/cloudinary.js"
 
 const registerUser = asyncHandlerPromise(async (req, res) => {
     // get user details from frontend
-    console.log(req.body)
     const { username, fullname, email, password } = req.body
-    console.log(username, fullname, email, password);
+    // console.log(username, fullname, email, password);
 
     // validation - not empty
     if (
@@ -26,7 +25,7 @@ const registerUser = asyncHandlerPromise(async (req, res) => {
     }
 
     // check for images, check for avatar
-    console.log(req)
+    console.log(req.files)
     const avatarLocalPath = req.files?.avatar[0]?.path;
     const coverImageLocalPath = req.files?.coverImage[0]?.path;
 
@@ -48,7 +47,7 @@ const registerUser = asyncHandlerPromise(async (req, res) => {
         email,
         password,
         avatar: avatar.url,
-        avatar: coverImage?.url || "",
+        coverImage: coverImage?.url || "",
     })
 
     // check for user creation
